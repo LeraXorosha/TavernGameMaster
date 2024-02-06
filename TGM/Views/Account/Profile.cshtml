@@ -1,0 +1,55 @@
+﻿@model TGM.Models.DataBase.Entities.User
+@{
+	ViewData["Title"] = "Login";
+}
+
+<h1>Your Profile</h1>
+<div>
+
+	<h4>User data</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Id)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Id)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Login)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Login)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Email)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Email)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Role)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Role.Name)
+		</dd>
+	</dl>
+
+	<h4>Profile data</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Profile.Name)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Profile.Name)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Profile.NickName)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Profile.NickName)
+		</dd>
+	</dl>
+
+</div>

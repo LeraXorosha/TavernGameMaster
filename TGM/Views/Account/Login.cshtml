@@ -1,0 +1,43 @@
+﻿@model TGM.Models.ViewModels.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="wrapper">
+    <div class="logo">
+        <img src="/logoTGM.png" alt="">
+    </div>
+    <div class="text-center mt-4 name">
+        Tavern Game Master's
+    </div>
+    <form asp-action="Login" asp-controller="Account" class="p-3 mt-3">
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <label asp-for="LoginOrEmail"></label>
+            <input type="text" asp-for="LoginOrEmail" />
+
+
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <label asp-for="Password"></label>
+            <input type="password" asp-for="Password" />
+
+        </div>
+
+        <button class="btn mt-3">Войти</button>
+        <button class="btn mt-3"> <a asp-action="Register">Зарегистрироваться</a></button>
+    </form>
+
+    <div class="text-center fs-6">
+        <strong>Вперёд в мир приключений!</strong>
+
+        @if (ViewData.ModelState.ContainsKey("isLoginFailed"))
+        {
+            foreach (var err in @ViewData.ModelState["isLoginFailed"].Errors)
+            {
+                <h5>@err.ErrorMessage</h5>
+            }
+        }
+    </div>
+</div>

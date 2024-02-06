@@ -1,0 +1,64 @@
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using TGM.Extensions;
+using TGM.Models.DataBase.Entities;
+
+namespace TGM.Models
+{
+    public class TgmDBContext : DbContext
+    {
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
+		public DbSet<UserProfile> UserProfiles { get; set; }
+		public DbSet<Game> Games { get; set; }
+
+
+        public TgmDBContext(DbContextOptions options) : base(options)
+        {
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.AddInitialData();
+        }
+    }
+    public static class ModelBuilderExtensions
+    {
+        public static ModelBuilder AddInitialData(this ModelBuilder modelBuilder)
+        {
+
+            List<Role> roles = new(){
+                    new Role { Id = 1, Name = "master" },
+                    new Role { Id = 2, Name = "player" },
+            };
+
+            List<User> users = new(){
+                    new User {Id = 1, Email = "subba@mail.ru", Login="GMRocki", Password = "1".ToHash(), RoleId = 1},
+                    new User {Id = 2, Email = "lerlera@mail.ru", Login="Leroka", Password = "1".ToHash(), RoleId = 2}
+                    
+            };
+
+            List <UserProfile> userProfiles = new(){
+                new UserProfile {Id = 1, Name = "Субботин Иван Максимович", NickName = "Rocki", Phone = "8(908)353-32-94", PlaceOfResidence = "Новосибирск", TimeZone = "MSK+4", UserId = 1},
+                new UserProfile {Id = 2, Name = "Хорошунова Валерия Сергеевна", NickName = "Quinee", Phone = "8(908)353-32-94" ,PlaceOfResidence = "Улан-Удэ", TimeZone = "MSK+5",UserId = 2}
+            };
+
+            List<Game> games = new()
+            {
+                new Game { Id = 1, Name = "Возрождение короля Лича!", EditorialBoard = "D&D", Description = "Действие дополнения происходит на холодном северном материке Нордскол, во владениях Короля-лича, падшего принца Артаса Менетила.", Price = 2000, UserId = 1},
+                new Game { Id = 2, Name = "Мир туманности!", EditorialBoard = "RussionCorparation", Description = "Действие происходит в далеких туманных горах Алтая. Необычные приколючение в пещере горного короля", Price = 1800, UserId = 1}
+            };
+
+
+            modelBuilder.Entity<Role>().HasData(roles);
+            modelBuilder.Entity<User>().HasData(users);
+			modelBuilder.Entity<UserProfile>().HasData(userProfiles);
+
+			return modelBuilder;
+        }
+    }
+}
+
+

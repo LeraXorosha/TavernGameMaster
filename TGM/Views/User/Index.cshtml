@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TGM.Models.DataBase.Entities.UserProfile>
+@{
+	Layout = "_LayoutMaster";
+	ViewData["Title"] = "Master Users Page";
+}
+
+<link rel="stylesheet" href="~/css/styleTable.css" asp-append-version="true" />
+<script src="~/js/table.js" asp-append-version="true"></script>
+
+<div class="height-100">
+    <h1>Все пользователи TGM</h1>
+    <div class="tbl-header-users">
+            <table class="tbl-record" cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                    <tr>
+                        <th>
+                            ФИО
+                        </th>
+                        <th>
+                            Псевдоним
+                        </th>
+                        <th>
+                            Телефон
+                        </th>
+                        <th>
+                            Почта
+                        </th>
+                        <th>
+                            Место жительства
+                        </th>
+                        <th>
+                            Часовой пояс
+                        </th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NickName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PlaceOfResidence)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TimeZone)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    </div>
+</div>
