@@ -7,7 +7,7 @@ using TGM.Models.DataBase.Entities;
 using TGM.Models.ViewModels;
 using TGM.Models;
 using Microsoft.EntityFrameworkCore;
-using TGM.Extensions;
+using TGM.Models.DataBase;
 
 namespace TGM.Controllers
 {
@@ -106,7 +106,7 @@ namespace TGM.Controllers
 					return RedirectToAction("Index", "Player");
 					break;
 				case "master":
-					return RedirectToAction("Index","User");
+					return RedirectToAction("Index","Game");
 					break;
 			}
 			return RedirectToAction("Index", "Home");

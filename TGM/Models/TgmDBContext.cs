@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using TGM.Extensions;
+using TGM.Models.DataBase;
 using TGM.Models.DataBase.Entities;
+using Bogus;
 
 namespace TGM.Models
 {
@@ -15,7 +16,7 @@ namespace TGM.Models
 
         public TgmDBContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -28,6 +29,14 @@ namespace TGM.Models
     {
         public static ModelBuilder AddInitialData(this ModelBuilder modelBuilder)
         {
+            var faker = new Faker("ru");
+            faker.IndexFaker = 6;
+            var fakerUser = new Faker<User>()
+                .RuleFor(u => u.Id, faker.IndexFaker++)
+                .RuleFor(u => u.Login, faker.Person.UserName)
+                .RuleFor(u => u.Email, faker.Person.Email)
+                .RuleFor(u => u.Password, faker.Random.Word().ToHash())
+                .RuleFor(u => u.RoleId, 2);
 
             List<Role> roles = new(){
                     new Role { Id = 1, Name = "master" },
@@ -47,16 +56,32 @@ namespace TGM.Models
 
             List<Game> games = new()
             {
-                new Game { Id = 1, Name = "Возрождение короля Лича!", EditorialBoard = "D&D", Description = "Действие дополнения происходит на холодном северном материке Нордскол, во владениях Короля-лича, падшего принца Артаса Менетила.", Price = 2000, UserId = 1},
-                new Game { Id = 2, Name = "Мир туманности!", EditorialBoard = "RussionCorparation", Description = "Действие происходит в далеких туманных горах Алтая. Необычные приколючение в пещере горного короля", Price = 1800, UserId = 1}
+                new Game { Id = 1, Name = "Возрождение короля Лича!", EditorialBoard = "D&D", Description = "Действие дополнения происходит на холодном северном материке Нордскол, во владениях Короля-лича, падшего принца Артаса Менетила.",Date = new DateTime(2024-05-20), Price = 2000, UserId = 1},
+                new Game { Id = 2, Name = "Мир туманности!", EditorialBoard = "RussionCorparation", Description = "Действие происходит в далеких туманных горах Алтая. Необычные приколючение в пещере горного короля",Date = new DateTime(1024-01-12), Price = 1800, UserId = 1}
             };
+
+            List<Tag> tags = new()
+        {
+            new Tag { Id = 1, Name = "#top-of-the-world"},
+            new Tag { Id = 2, Name = "#mmo"},
+            new Tag { Id = 3, Name = "#csharp"},
+            new Tag { Id = 4, Name = "#imloosingit"},
+            new Tag { Id = 5, Name = "#unluck"},
+            new Tag { Id = 6, Name = "#undead"},
+        };
+
+            for (var i = 7; i < 21; i++)
+            {
+                tags.Add(new Tag { Id = i, Name = faker.Lorem.Word() });
+            }
 
 
             modelBuilder.Entity<Role>().HasData(roles);
             modelBuilder.Entity<User>().HasData(users);
 			modelBuilder.Entity<UserProfile>().HasData(userProfiles);
+            modelBuilder.Entity<Game>().HasData(games);
 
-			return modelBuilder;
+            return modelBuilder;
         }
     }
 }

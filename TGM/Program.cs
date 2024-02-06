@@ -43,7 +43,7 @@ static string GetConnString()
 {
     var folder = Environment.SpecialFolder.Personal;
     var path = Environment.GetFolderPath(folder);
-    var dbPath = Path.Join(path, "WebApp-ef-complex.db");
+    var dbPath = Path.Join(path, "TractirGameMaster.db");
     var connectionString = $"Data source={dbPath}";
     return connectionString;
 }

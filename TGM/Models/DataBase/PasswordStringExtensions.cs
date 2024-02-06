@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
 
-namespace TGM.Extensions
+namespace TGM.Models.DataBase
 {
     static class PasswordStringExtensions
     {
@@ -28,6 +28,6 @@ namespace TGM.Extensions
 
             return sb.ToString();
         }
-    
+
     }
 }

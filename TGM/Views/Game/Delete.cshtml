@@ -1,0 +1,31 @@
+﻿@model TGM.Models.DataBase.Entities.Game
+
+@{
+	Layout = "_LayoutMaster";
+	ViewData["Title"] = "Delete";
+}
+<div class="wrapper">
+	<center>
+	<h1>Удаление</h1>
+
+	<h3>Вы уверены что хотите удалить игровую сессию?</h3>
+	<div>
+		<center>
+		<dl class="row">
+			<dt class = "col-sm-2">
+				Название
+			</dt>
+			<dd class = "col-sm-10">
+				@Html.DisplayFor(model => model.Name)
+			</dd>
+		</dl>
+	
+		<form asp-action="Delete">
+			<input type="hidden" asp-for="Id" />
+			<input type="submit" value="Delete" class=" btn-danger" />
+			<button class="btn mt-3"> <a asp-action="Login">Вернуться обратно</a></button>
+		</form>
+		</center>
+	</div>
+	</center>
+</div>

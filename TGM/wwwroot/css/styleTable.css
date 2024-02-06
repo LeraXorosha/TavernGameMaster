@@ -15,13 +15,27 @@
 
 .tbl-header-users {
     background-color: rgba(0,0,0,0.3);
-    height: 400px;
+    height: 800px;
     overflow-x: auto;
 }
 
     .tbl-header-users tr:hover td {
         background: #881336; /* фон строки при наведении */
     }
+
+
+tbl-games {
+    width: 800px;
+    table-layout: fixed;
+}
+
+
+.tbl-header-games {
+    background-color: rgba(0,0,0,0.3);
+    height: 800px;
+    overflow-x: auto;
+}
+
 
 th {
     padding: 50px 15px;
@@ -46,7 +60,7 @@ td {
 
 
 .Users {
-    width: 800px;
+    width: 600px;
     margin-top: 80px;
     margin-left: 550px;
     border-radius: 6px;
@@ -62,11 +76,11 @@ td {
 }
 
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.3);
 }
 
 
